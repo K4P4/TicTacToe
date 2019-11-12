@@ -1,0 +1,95 @@
+body{
+    background-color: ghostwhite;
+  }
+  
+  .numb {
+    background-color: #A076FF;
+    border: none;
+    cursor: pointer;
+    font-size: 32px;
+    padding: 10px 32px;
+    font-weight: 550;
+    height: 100px;
+    width: 100px;
+    color: whitesmoke;
+    transition: .7s;
+  }
+
+  .numb:hover {
+    background-color: #B391F8;
+  }
+
+  .container {
+    background-color: gray;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    z-index: 1;
+    opacity: 0;
+  }
+
+  input {
+    background-color: lightgray;
+    padding: 9px 25px;
+    border: none;
+    border-bottom: 1px solid rebeccapurple;
+  }
+
+  label {
+    color: rebeccapurple;
+    font-size: 14px;
+    margin-left: 14px;
+    text-align: left;
+  }
+
+  .menu{
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    z-index: 2;
+  }
+
+  button {
+    background-color: #A076FF;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 10px 32px;
+    font-weight: 550;
+    color: whitesmoke;
+    transition: .7s;
+  }
+
+  .opt{
+    background-color: orange;
+    font-size: 18px;
+    border: 1px solid gray;
+  }
+
+  .opt:hover{
+    background-color: rgb(255, 140, 8);
+  }
+
+  .plr{
+    background-color:gray;
+    border: none;
+    padding: 10px 8px;
+    font-size: 18px;
+    width: 230px;
+    border-bottom: 1px solid rebeccapurple;
+  }
+
+  .scr{
+    background-color:gray;
+    border: none;
+    padding: 10px 10px;
+    font-size: 18px;
+    width: 30px;
+    border-bottom: 1px solid rebeccapurple;
+  }
+
+  .players tr{ line-height: 1px; }

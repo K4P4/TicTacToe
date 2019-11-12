@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+let Player1 = "";
+let Player2 = "";
+let clicked = ['1','2','3',
+               '4','5','6',
+               '7','8','9'];
+let current = 1;
+         function reset(){
+            clicked =['1','2','3',
+                      '4','5','6',
+                      '7','8','9'];
+            for(let i = 0; i < 9; i++){
+               document.getElementById(i+1).disabled = false;
+               document.getElementById(i+1).innerHTML = "";
+               document.getElementById(i+1).style.backgroundColor = "#A076FF";
+               current = 1;
+
+            }
+         }
+         function menu(){
+            reset();
+            document.getElementById("menu").style.opacity = "1";
+            document.getElementById("game").style.opacity = "0";
+            document.getElementById("game").style.zIndex = "1";
+            document.getElementById("menu").style.zIndex = "2";
+            for(let i = 0; i < 9; i++){
+                  document.getElementById(i+1).disabled = true;
+            }
+            document.getElementById("res").disabled = true;
+            document.getElementById("quit").disabled = true;
+         }
+         function play(){
+            document.getElementById("plr1").value = document.getElementById("player1").value + " [X]";
+            document.getElementById("plr2").value = document.getElementById("player2").value + " [O]";
+            document.getElementById("scr1").value = 0;
+            document.getElementById("scr2").value = 0;
+            document.getElementById("game").style.opacity = "1";
+            document.getElementById("menu").style.opacity = "0";
+            document.getElementById("game").style.zIndex = "2";
+            document.getElementById("menu").style.zIndex = "1";
+            for(let i = 0; i < 9; i++){
+                  document.getElementById(i+1).disabled = false;
+            }
+            document.getElementById("res").disabled = false;
+            document.getElementById("quit").disabled = false;
+         }
+         function change(id)
+         {
+            if(current%2 > 0) clicked[parseInt(id)-1] = "x";
+            else clicked[parseInt(id)-1] = "o";
+            current++;
+            document.getElementById(id).innerHTML= clicked[parseInt(id)-1];
+            document.getElementById(id).disabled = true;
+            checkWinner(current);
+         }
+         function checkWinner(current)
+         {
+            let sequence = [-1,-1,-1];
+
+            for(let i = 0; i <= 6; i=i+3){
+            if((clicked[i]===clicked[i+1])&&(clicked[i+1]===clicked[i+2])) {sequence = [i, i+1, i+2]};
+            }
+            for(let i = 0; i < 3; i++){
+            if((clicked[i]==clicked[i+3])&&(clicked[i+3]==clicked[i+6])) {sequence = [i, i+3, i+6]};
+            }
+            if((clicked[0]==clicked[4])&&(clicked[4]==clicked[8])) {sequence = [0, 4, 8]};
+            if((clicked[2]==clicked[4])&&(clicked[4]==clicked[6])) {sequence = [2, 4, 6]};
+
+            if(sequence[0] !== -1){
+               document.getElementById(sequence[0]+1).style.backgroundColor = "red";
+               document.getElementById(sequence[1]+1).style.backgroundColor = "red";
+               document.getElementById(sequence[2]+1).style.backgroundColor = "red";
+               for(let i = 0; i < 9; i++){
+                  document.getElementById(i+1).disabled = true;
+               }
+               if(clicked[sequence[0]]=== "x"){
+                  document.getElementById("scr1").value ++;
+               }
+               else document.getElementById("scr2").value ++;
+            }
+            else if(current == 10) console.log("It's a tie");
+         }
+      </script> 
+  <meta charset = "utf-8">
+  <meta name = "viewport" content = "width=device-width">
+  <title> TicTacToe </title>
+   <link rel ="stylesheet" href ="styles.css">
+</head>
+
+<body>
+<div class = menu id="menu">
+<label for="player1"><b>Player 1</b></label>
+        <input
+          id="player1"
+          type="text"
+          required
+        /><br />
+
+<label for="player2"><b>Player 2</b></label>
+        <input
+          id="player2"
+          type="text"
+          required
+        /><br />
+
+        <button type="submit" onclick="play()">Play</button>
+</div>
+
+  <div class = container id="game">
+  <table class = "players"> 
+         <tr> 
+            <td><input class = "plr" type="text" id="plr1" disabled/></td>
+            <td><input class = "scr" type="number" id="scr1" disabled/></td>
+         </tr> 
+         <tr> 
+            <td><input class = "plr" type="text" id="plr2" disabled/></td>
+            <td><input class = "scr" type="number" id="scr2" disabled/></td>
+         </tr> 
+   </table>
+     <table> 
+         <tr> 
+            <td><button class = "numb" id="1" onclick="change(this.id)" disabled></button> </td> 
+            <td><button class = "numb" id="2" onclick="change(this.id)" disabled></button> </td> 
+            <td><button class = "numb" id="3" onclick="change(this.id)" disabled></button> </td> 
+
+         </tr> 
+         <tr> 
+            <td><button class = "numb" id="4" onclick="change(this.id)" disabled></button> </td> 
+            <td><button class = "numb" id="5" onclick="change(this.id)" disabled></button> </td> 
+            <td><button class = "numb" id="6" onclick="change(this.id)" disabled></button> </td>  
+         </tr> 
+         <tr> 
+            <td><button class = "numb" id="7" onclick="change(this.id)" disabled></button> </td> 
+            <td><button class = "numb" id="8" onclick="change(this.id)" disabled></button> </td> 
+            <td><button class = "numb" id="9" onclick="change(this.id)" disabled></button> </td> 
+         </tr> 
+      </table> 
+      <button class = "opt" id="res" onclick="reset()">Reset Board</button>
+      <button class = "opt" id="quit" onclick="menu()">New Game</button>
+  </div>
+</body>
